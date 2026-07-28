@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control - IAEV</title>
+  
+  <!-- Ruta hacia el CSS del Dashboard -->
+  <link rel="stylesheet" href="./css/principal.css">
+  
+  <!-- Íconos de Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <!-- Sidebar / Menú Lateral -->
+    <aside class="sidebar">
+      <div class="logo-container">
+        <img src="./imagenes/portal.png" alt="IAEV Logo" class="logo-img">
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <i data-lucide="layout-grid"></i>
+            <span>Panel de control</span>
+          </li>
+          <li class="nav-item">
+            <i data-lucide="users"></i>
+            <span>Estudiantes</span>
+          </li>
+          <li class="nav-item">
+            <i data-lucide="calendar"></i>
+            <span>Sesiones</span>
+          </li>
+          <li class="nav-item">
+            <i data-lucide="alert-triangle"></i>
+            <span>Riesgo académico</span>
+          </li>
+          <li class="nav-item">
+            <i data-lucide="file-up"></i>
+            <span>Cargar datos</span>
+          </li>
+          <li class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Configuración</span>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#">Términos y condiciones</a>
+      </div>
+    </aside>
+
+    <!-- Área Principal de Contenido -->
+    <main class="main-content">
+      
+      <!-- Encabezado Superior -->
+      <header class="top-header">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar estudiante por nombre o matrícula...">
+          <i data-lucide="search"></i>
+        </div>
+
+        <div class="user-profile">
+          <div class="avatar">OL</div>
+          <div class="user-info">
+            <span class="user-name">Olga Luevano</span>
+            <span class="user-role">Coordinadora</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Sección de Métricas Rápidas -->
+      <section class="metrics-section">
+        <h2>Métricas rápidas</h2>
+        <div class="cards-grid">
+          
+          <div class="metric-card">
+            <h3>Total de mentorías activas</h3>
+            <div class="metric-value-container">
+              <span class="metric-number">342</span>
+              <span class="badge badge-success">+5%</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <h3>Estudiantes en riesgo</h3>
+            <div class="metric-value-container">
+              <span class="metric-number">18</span>
+            </div>
+            <p class="metric-subtext">
+              <span class="text-orange">12</span> Medio, <span class="text-red">6</span> Crítico
+            </p>
+          </div>
+
+          <div class="metric-card">
+            <h3>Próximas sesiones</h3>
+            <div class="metric-value-container">
+              <span class="metric-number">24</span>
+              <span class="sub-label">esta semana</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tabla de Estado de Riesgo Académico -->
+      <section class="table-section">
+        <h2>Estado de Riesgo Académico de Estudiantes</h2>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Nombre del Estudiante</th>
+                <th>Matrícula</th>
+                <th>Nivel de Riesgo</th>
+                <th>Mentor</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="status-indicator status-green"></span></td>
+                <td>Diego Manchón</td>
+                <td>123456</td>
+                <td><span class="risk-badge risk-bueno">Bueno</span></td>
+                <td>Jose Martínez</td>
+                <td><button class="btn-view">Ver más</button></td>
+              </tr>
+              <tr>
+                <td><span class="status-indicator status-yellow"></span></td>
+                <td>Karely Ramírez</td>
+                <td>123456</td>
+                <td><span class="risk-badge risk-medio">Medio</span></td>
+                <td>Jose Martínez</td>
+                <td><button class="btn-view">Ver más</button></td>
+              </tr>
+              <tr>
+                <td><span class="status-indicator status-red"></span></td>
+                <td>Anna Limón</td>
+                <td>093486</td>
+                <td><span class="risk-badge risk-critico">Crítico</span></td>
+                <td>Jose Martínez</td>
+                <td><button class="btn-view">Ver más</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

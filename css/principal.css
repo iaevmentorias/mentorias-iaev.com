@@ -1,0 +1,357 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --bg-dark: #222222;
+  --bg-light: #f3f3f3;
+  --bg-card: #ffffff;
+  --primary-yellow: #ffcc00;
+  --status-green: #38a169;
+  --status-green-light: #86ff98;
+  --status-green-bg: #c6f6d5;
+  --status-yellow-bg: #fefcbf;
+  --status-orange: #e59800;
+  --status-red: #e53e3e;
+  --text-dark: #111111;
+  --text-light: #ffffff;
+  --border-color: #d9d9d9;
+}
+
+/* 1. Body adaptado para ocupar el 100% exacto de la pantalla */
+body {
+  background-color: var(--bg-dark);
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Evita barras de desplazamiento innecesarias en el fondo */
+  color: var(--text-dark);
+}
+
+/* 2. El contenedor toma todo el ancho y alto disponible */
+.dashboard-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* 3. Menú lateral fijo de alto completo */
+.sidebar {
+  width: 250px;
+  min-width: 250px; /* Impide que se encoja la barra lateral */
+  height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo-img {
+  max-width: 140px;
+  height: auto;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto; /* Permite scroll en el menú si la pantalla es muy corta */
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #cccccc;
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-item i {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-item:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.nav-item.active {
+  background-color: var(--primary-yellow);
+  color: #000000;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.sidebar-footer a {
+  color: #666666;
+  font-size: 0.75rem;
+  text-decoration: underline;
+}
+
+/* 4. Área Principal expandida con scroll independiente */
+.main-content {
+  flex: 1;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite hacer scroll solo en el contenido si es largo */
+}
+
+.top-header {
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+}
+
+.search-bar {
+  position: relative;
+  width: 360px;
+}
+
+.search-bar input {
+  width: 100%;
+  background-color: #333333;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 36px 8px 16px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: #888888;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #888888;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.user-role {
+  color: #888888;
+  font-size: 0.7rem;
+}
+
+.metrics-section {
+  padding: 32px 32px 16px 32px;
+}
+
+.metrics-section h2,
+.table-section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #000000;
+}
+
+.cards-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.metric-card {
+  flex: 1;
+  border: 1.5px solid var(--primary-yellow);
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+.metric-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111111;
+}
+
+.metric-value-container {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.metric-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.metric-subtext {
+  font-size: 0.75rem;
+  color: #555555;
+  margin-top: 6px;
+}
+
+.sub-label {
+  font-size: 0.85rem;
+  color: #333333;
+  font-weight: 500;
+}
+
+.text-orange { color: var(--status-orange); font-weight: bold; }
+.text-red { color: var(--status-red); font-weight: bold; }
+
+.table-section {
+  padding: 16px 32px 32px 32px;
+  flex: 1;
+}
+
+.table-container {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-x: auto; /* Permite scroll horizontal si la tabla es ancha */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+th {
+  padding: 12px 10px;
+  font-weight: 700;
+  color: #000000;
+  border-bottom: 1px solid #eeeeee;
+}
+
+td {
+  padding: 14px 10px;
+  color: #333333;
+  vertical-align: middle;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 24px;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.status-green { background-color: var(--status-green); }
+.status-yellow { background-color: var(--status-green-light); }
+.status-red { background-color: var(--status-red); }
+
+.risk-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: 70px;
+}
+
+.risk-bueno {
+  background-color: var(--status-green-bg);
+  color: #22543d;
+}
+
+.risk-medio {
+  background-color: var(--status-yellow-bg);
+  color: #744210;
+}
+
+.risk-critico {
+  background-color: var(--status-red);
+  color: #ffffff;
+}
+
+.btn-view {
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #555555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background-color: var(--bg-light);
+  color: #000000;
+}
