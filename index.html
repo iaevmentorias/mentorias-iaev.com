@@ -1,48 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido a su Portal</title>
-  <link rel="stylesheet" href="./css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - IAEV</title>
+    <link rel="stylesheet" href="css/estilo_base.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
+<body class="login-body">
 
-  <div class="card-container">
-    <h1>Bienvenido a su Portal</h1>
-    
-    <div class="content">
-      <!-- Columna izquierda: Ilustraciones / Logo -->
-      <div class="left-section">
-        <img src="./imagenes/portal.png" alt="Ilustración IAEV">
-      </div>
+    <div class="login-card">
+        <h2>Bienvenido a su Portal</h2>
+        <div class="login-content">
+            <div class="login-illustration">
+                <img src="imagenes/portal.png" alt="Ilustración IAEV">
+            </div>
+            
+            <form class="login-form" action="principal.html">
+                <div class="form-group">
+                    <label>Usuario (Correo electronico)</label>
+                    <input type="email" value="olgaluev1098@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" value="********" required>
+                </div>
 
-    <!-- Columna derecha: Formulario de Login -->
-      <div class="right-section">
-        <!-- Agregamos action="./principal.html" aquí -->
-        <form action="./principal.html">
-          <div class="form-group">
-            <label for="email">Usuario (Correo electrónico)</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value="usuario8@gmail.com" 
-              placeholder="usuario@gmail.com"
-            >
-          </div>
+                <button type="submit" class="btn-yellow">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
 
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              value="************" 
-              placeholder="************"
-            >
-          </div>
-
-          <button type="submit" class="btn-submit">Iniciar Sesión</button>
-        </form>
-      </div>
+</body>
+</html>

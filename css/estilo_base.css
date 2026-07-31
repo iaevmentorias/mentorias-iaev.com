@@ -1,0 +1,221 @@
+/* RESET Y VARIABLES GLOBALES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+    --bg-dark: #232323;
+    --primary-yellow: #f1c40f;
+    --primary-yellow-hover: #d4ac0d;
+    --text-white: #ffffff;
+    --text-muted: #888888;
+    --border-color: #e0e0e0;
+    --badge-good: #2ecc71;
+    --badge-medium: #f39c12;
+    --badge-danger: #e74c3c;
+}
+
+body {
+    background-color: var(--bg-dark);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.layout-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* SIDEBAR / MENÚ LATERAL */
+.sidebar {
+    width: 240px;
+    background-color: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 10px;
+}
+
+.logo-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.logo-container img {
+    max-width: 140px;
+    height: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin-bottom: 5px;
+}
+
+.sidebar-menu li.active a, 
+.sidebar-menu li a:hover {
+    background-color: var(--primary-yellow);
+    color: #000000;
+    font-weight: bold;
+}
+
+.sidebar-footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.sidebar-footer a {
+    color: var(--text-muted);
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+/* CONTENEDOR PRINCIPAL Y TOPBAR */
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.topbar {
+    height: 60px;
+    background-color: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.search-box {
+    position: relative;
+    width: 350px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #383838;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.user-info .role {
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+.content-area {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #111111;
+}
+
+/* TABLAS REUTILIZABLES */
+.table-container {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.data-table th {
+    padding: 12px;
+    border-bottom: 2px solid #eeeeee;
+    color: #555555;
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.badge-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-status.bueno { background-color: var(--badge-good); }
+.badge-status.medio { background-color: var(--badge-medium); }
+.badge-status.critico { background-color: var(--badge-danger); }
+
+.btn-action {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: none;
+    color: #333333;
+}
+
+.btn-action:hover {
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,37 @@
+.text-center {
+    text-align: center;
+}
+
+.black-card {
+    background-color: #000000;
+    border: 3px solid var(--primary-yellow);
+    border-radius: 20px;
+    padding: 40px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el grupo de botones verticalmente */
+    gap: 45px;               /* Mayor distancia entre cada botón */
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.btn-option {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 14px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    width: fit-content;
+    min-width: 260px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-option:hover {
+    background-color: #f0f0f0;
+}

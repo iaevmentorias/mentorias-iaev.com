@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño Sesiones - IAEV</title>
+    <link rel="stylesheet" href="css/estilo_base.css">
+    <link rel="stylesheet" href="css/sesiones.css">
+</head>
+<body>
+
+<div class="layout-container">
+    <aside class="sidebar">
+        <div>
+            <div class="logo-container">
+                <img src="imagenes/principal.png" alt="IAEV Logo">
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="principal.html">Panel de control</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li class="active"><a href="sesiones.html">Sesiones</a></li>
+                <li><a href="riesgo.html">Riesgo academico</a></li>
+                <li><a href="carga.html">Cargar datos</a></li>
+                <li><a href="configuracion.html">Configuración</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#">Términos y condiciones</a>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="search-box">
+                <input type="text" placeholder="Buscar estudiante por nombre o matricula...">
+            </div>
+            <a href="perfil.html" class="user-profile">
+                <div class="avatar-circle">OL</div>
+                <div class="user-info">
+                    <span>Olga Luevano</span>
+                    <span class="role">Coordinadora</span>
+                </div>
+            </a>
+        </header>
+
+        <main class="content-area">
+            <h2 class="page-title">Calendario de Sesiones</h2>
+
+            <!-- CONTROLES DEL CALENDARIO (MES Y AÑO) -->
+            <div class="calendar-controls">
+                <button id="btn-prev" class="btn-cal">&lt; Anterior</button>
+                
+                <div class="calendar-selects">
+                    <select id="select-month">
+                        <option value="0">Enero</option>
+                        <option value="1">Febrero</option>
+                        <option value="2">Marzo</option>
+                        <option value="3">Abril</option>
+                        <option value="4">Mayo</option>
+                        <option value="5">Junio</option>
+                        <option value="6">Julio</option>
+                        <option value="7">Agosto</option>
+                        <option value="8">Septiembre</option>
+                        <option value="9">Octubre</option>
+                        <option value="10">Noviembre</option>
+                        <option value="11">Diciembre</option>
+                    </select>
+                    
+                    <input type="number" id="input-year" min="2020" max="2035" value="2026">
+                </div>
+
+                <button id="btn-next" class="btn-cal">Siguiente &gt;</button>
+            </div>
+
+            <!-- GRID DEL CALENDARIO -->
+            <div class="calendar-grid">
+                <div class="calendar-header">Dom</div>
+                <div class="calendar-header">Lun</div>
+                <div class="calendar-header">Mar</div>
+                <div class="calendar-header">Mié</div>
+                <div class="calendar-header">Jue</div>
+                <div class="calendar-header">Vie</div>
+                <div class="calendar-header">Sáb</div>
+
+                <!-- Las celdas de los días se generarán dinámicamente con JS -->
+                <div id="calendar-days" class="calendar-days-container"></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- VENTANA EMERGENTE (MODAL) PARA CREAR/MODIFICAR EVENTO -->
+<div id="event-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="modal-close">&times;</span>
+        <h3 id="modal-title">Agregar Nota / Aviso</h3>
+        <p id="modal-date-text" class="modal-date-info"></p>
+        
+        <form id="event-form">
+            <div class="form-group">
+                <label for="event-text">Nota o Recordatorio:</label>
+                <textarea id="event-text" placeholder="Ej. Sesión de mentoría con Diego Manchón a las 4:00 PM" required></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" id="btn-delete" class="btn-delete">Eliminar Aviso</button>
+                <button type="submit" class="btn-save">Guardar Aviso</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/sesiones.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.profile-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    background-color: #ffffff;
+}
+
+.profile-info {
+    text-align: left;
+    width: 100%;
+    max-width: 450px;
+    font-size: 20px;
+    line-height: 2.2;
+}
