@@ -1,5 +1,5 @@
 // =========================================================================
-// MENTORÍAS IAEV - APP.JS (LECTURA DE ENTREVISTAS AL CALENDARIO)
+// MENTORÍAS IAEV 
 // =========================================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
@@ -195,7 +195,7 @@ window.logoutUser = () => {
 };
 
 // =========================================================================
-// 2. NAVEGACIÓN PROTEGIDA
+// 2. NAVEGACIÓN 
 // =========================================================================
 function initNavigation() {
   const navButtons = document.querySelectorAll('.sidebar-menu .nav-btn');
@@ -232,7 +232,8 @@ function initNavigation() {
   if (userProfileBtn) {
     userProfileBtn.addEventListener('click', () => {
       if (!state.currentUser) return;
-      views.forEach(v => v.classList.add('hidden'));
+      views
+      (v => v.classList.add('hidden'));
       navButtons.forEach(b => b.classList.remove('active'));
       document.getElementById('perfilView')?.classList.remove('hidden');
     });
@@ -240,7 +241,7 @@ function initNavigation() {
 }
 
 // =========================================================================
-// 3. LECTURA INTELIGENTE DE EXCEL Y EXTRACCIÓN DE ENTREVISTAS AL CALENDARIO
+// 3. LECTURA DE EXCEL Y EXTRACCIÓN DE ENTREVISTAS DEL CALENDARIO
 // =========================================================================
 function initExcelHandling() {
   const dropzone = document.getElementById('dropzone');
@@ -363,7 +364,7 @@ function processExcelFile(file) {
             estado: "Activo"
           });
 
-          // Extraer fechas de entrevistas escaneando patrones de la fila
+
           extraerEntrevistasDeFila(cleanCells, matriculaEncontrada, nombreEncontrado);
         }
       });
@@ -377,7 +378,7 @@ function processExcelFile(file) {
       estudiantesValidos.forEach(est => mapUnicos.set(est.matricula, est));
       state.students = Array.from(mapUnicos.values());
 
-      // Sincronizar en Firestore
+      // Sincronizar 
       try {
         for (let est of state.students) {
           await setDoc(doc(db, "estudiantes", est.matricula), {
@@ -410,8 +411,7 @@ function processExcelFile(file) {
 
   reader.readAsArrayBuffer(file);
 }
-
-// Escanea la fila buscando secuencias de [Mes, Día, Hora] para armar la sesión del calendario
+ //ESCANER PARA EL CALENDARIO
 function extraerEntrevistasDeFila(cells, matricula, nombre) {
   let anioActual = state.calendar.year || new Date().getFullYear();
 
@@ -436,7 +436,7 @@ function extraerEntrevistasDeFila(cells, matricula, nombre) {
         let horaTexto = (horaStr && horaStr.includes(':')) ? ` - ${horaStr} hrs` : '';
         let textoEntrevista = `Entrevista: [${matricula}] ${nombre}${horaTexto}`;
 
-        // Evitar duplicados exactos
+        // Evitar duplicados
         if (!state.calendar.sessions[dateKey].includes(textoEntrevista)) {
           state.calendar.sessions[dateKey].push(textoEntrevista);
         }
@@ -468,7 +468,7 @@ function exportToExcel() {
 }
 
 // =========================================================================
-// 4. RENDERIZADO DE TABLAS Y MÉTRICAS
+// 4. TABLAS Y MÉTRICAS
 // =========================================================================
 function updateAllViews() {
   calculateMetrics();
@@ -578,7 +578,7 @@ window.viewStudentDetail = (id) => {
 };
 
 // =========================================================================
-// 5. BUSCADOR Y CALENDARIO INTERACTIVO
+// 5. BUSCADOR Y CALENDARIO 
 // =========================================================================
 function initSearch() {
   const searchInput = document.getElementById('globalSearchInput');
