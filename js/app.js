@@ -1,5 +1,5 @@
 // =========================================================================
-// MENTORÍAS IAEV - APP.JS (VERSIÓN CORREGIDA - DISEÑO INTACTO)
+// MENTORÍAS IAEV - APP.JS (LOGIN ESTRICTO MANUAL - SIN AUTO-LOGIN)
 // =========================================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
@@ -7,8 +7,9 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebas
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
-  onAuthStateChanged, 
-  signOut 
+  signOut,
+  setPersistence,
+  inMemoryPersistence
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
 import { 
   getFirestore, 
@@ -36,7 +37,7 @@ const db = getFirestore(app);
 const state = {
   currentUser: null,
   selectedFile: null,
-  students: [],
+  students: [], 
   calendar: {
     year: 2026,
     month: 6,
@@ -47,17 +48,20 @@ const state = {
 };
 
 // =========================================================================
-// 1. CONTROL DE LOGIN Y VISIBILIDAD USANDO SOLO TUS CLASES (SIN ROMPER DISEÑO)
+// 1. CONTROL DE LOGIN ESTRICTO
 // =========================================================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const appContainer = document.getElementById('appContainer');
   const loginView = document.getElementById('loginView');
 
+  // Asegurar que la pantalla de inicio sea SIEMPRE el Login
   if (appContainer) appContainer.classList.add('hidden');
   if (loginView) loginView.classList.remove('hidden');
 
-  // Forzamos cierre de sesión inicial para que no entre con cookies guardadas
-  signOut(auth).catch(() => {});
+  // Matar cualquier sesión antigua que haya quedado en la caché del navegador
+  try {
+    await signOut(auth);
+  } catch (error) {}
 
   // Limpiar campos de texto al cargar
   const emailInput = document.getElementById('username');
@@ -74,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initLogin() {
   const loginForm = document.getElementById('loginForm');
-  const loginView = document.getElementById('loginView');
-  const appContainer = document.getElementById('appContainer');
 
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
@@ -88,62 +90,70 @@ function initLogin() {
       const email = emailInput ? emailInput.value.trim() : "";
       const password = passwordInput ? passwordInput.value.trim() : "";
 
-      // Validación estricta: No permite avanzar si están vacíos o incompletos
       if (!email || !email.includes('@') || !password) {
         alert("Acceso denegado: Debes ingresar un correo y contraseña válidos.");
         return;
       }
 
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        // Obligar a Firebase a NO guardar la sesión si se recarga la página
+        await setPersistence(auth, inMemoryPersistence);
+        
+        // Iniciar sesión
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        
+        // Cargar la interfaz manualmente solo si la contraseña fue correcta
+        mostrarDashboard(userCredential.user);
+
       } catch (error) {
         console.error("Error Auth:", error);
         alert("Acceso denegado: " + getAuthErrorMessage(error.code));
       }
     });
   }
+}
 
-  onAuthStateChanged(auth, async (user) => {
-    const isLoginVisible = loginView && !loginView.classList.contains('hidden');
+// Función exclusiva para construir la UI una vez que el login es exitoso
+function mostrarDashboard(user) {
+  const loginView = document.getElementById('loginView');
+  const appContainer = document.getElementById('appContainer');
 
-    if (user && isLoginVisible) {
-      state.currentUser = user;
-      
-      if (loginView) loginView.classList.add('hidden');
-      if (appContainer) appContainer.classList.remove('hidden');
+  if (loginView) loginView.classList.add('hidden');
+  if (appContainer) appContainer.classList.remove('hidden');
 
-      let nombreCompleto = user.displayName;
-      if (!nombreCompleto) {
-        let base = user.email.split('@')[0];
-        nombreCompleto = base.charAt(0).toUpperCase() + base.slice(1).replace('.', ' ');
-      }
+  state.currentUser = user;
 
-      let iniciales = nombreCompleto
-        .split(' ')
-        .map(n => n[0])
-        .join('')
-        .substring(0, 2)
-        .toUpperCase();
+  let nombreCompleto = user.displayName;
+  if (!nombreCompleto) {
+    let base = user.email.split('@')[0];
+    nombreCompleto = base.charAt(0).toUpperCase() + base.slice(1).replace('.', ' ');
+  }
 
-      const userNameElem = document.querySelector('.user-name');
-      if (userNameElem) userNameElem.textContent = nombreCompleto;
+  let iniciales = nombreCompleto
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .substring(0, 2)
+    .toUpperCase();
 
-      const avatarCircle = document.querySelector('.user-profile-widget .avatar-circle');
-      if (avatarCircle) avatarCircle.textContent = iniciales;
+  const userNameElem = document.querySelector('.user-name');
+  if (userNameElem) userNameElem.textContent = nombreCompleto;
 
-      const profileNameElem = document.querySelector('.profile-name');
-      if (profileNameElem) profileNameElem.textContent = nombreCompleto;
+  const avatarCircle = document.querySelector('.user-profile-widget .avatar-circle');
+  if (avatarCircle) avatarCircle.textContent = iniciales;
 
-      const profileEmailElem = document.querySelector('.profile-email');
-      if (profileEmailElem) profileEmailElem.textContent = user.email;
+  const profileNameElem = document.querySelector('.profile-name');
+  if (profileNameElem) profileNameElem.textContent = nombreCompleto;
 
-      const profileAvatarLarge = document.querySelector('.profile-avatar-large');
-      if (profileAvatarLarge) profileAvatarLarge.textContent = iniciales;
+  const profileEmailElem = document.querySelector('.profile-email');
+  if (profileEmailElem) profileEmailElem.textContent = user.email;
 
-      await cargarEstudiantesDesdeFirestore();
-      updateAllViews();
-    }
-  });
+  const profileAvatarLarge = document.querySelector('.profile-avatar-large');
+  if (profileAvatarLarge) profileAvatarLarge.textContent = iniciales;
+
+  // Iniciar dashboard completamente vacío de datos hasta importar Excel
+  state.students = []; 
+  updateAllViews();
 }
 
 function getAuthErrorMessage(code) {
@@ -166,6 +176,8 @@ function getAuthErrorMessage(code) {
 window.logoutUser = () => {
   signOut(auth).then(() => {
     state.currentUser = null;
+    state.students = []; // Limpiamos los datos al salir
+    
     document.getElementById('appContainer')?.classList.add('hidden');
     document.getElementById('loginView')?.classList.remove('hidden');
 
@@ -382,33 +394,6 @@ function processExcelFile(file) {
   };
 
   reader.readAsArrayBuffer(file);
-}
-
-async function cargarEstudiantesDesdeFirestore() {
-  try {
-    const querySnapshot = await getDocs(collection(db, "estudiantes"));
-    if (!querySnapshot.empty) {
-      let remoteStudents = [];
-      querySnapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        remoteStudents.push({
-          id: remoteStudents.length + 1,
-          nombre: data.nombre,
-          matricula: data.matricula,
-          riesgo: data.riesgo || "Bueno",
-          mentor: data.mentor || "Sin asignar",
-          carrera: data.carrera || "General",
-          grado: data.grado || "N/A",
-          estado: data.estado || "Activo"
-        });
-      });
-      if (remoteStudents.length > 0) {
-        state.students = remoteStudents;
-      }
-    }
-  } catch (error) {
-    console.error("Error al cargar Firestore:", error);
-  }
 }
 
 function exportToExcel() {

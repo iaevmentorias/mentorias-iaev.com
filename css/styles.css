@@ -8,12 +8,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background-color: #555555; /* Fondo gris oscuro consistente */
-  color: #333;
-  min-height: 100vh;
-}
-
 .hidden {
   display: none !important;
 }
@@ -725,4 +719,62 @@ body {
   font-size: 1.2rem;
   margin-bottom: 12px;
   color: #334155;
+}
+
+/* =========================================================================
+   ESTADO Y MODO OSCURO (DARK MODE)
+   ========================================================================= */
+body {
+  background-color: #f4f4f9;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .app-container,
+body.dark-mode .main-wrapper,
+body.dark-mode .content-area {
+  background-color: #121212;
+}
+
+body.dark-mode .metric-card,
+body.dark-mode .table-container,
+body.dark-mode .calendar-card,
+body.dark-mode .calendar-day-cell,
+body.dark-mode .dropzone-card {
+  background-color: #1e1e1e;
+  border-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-mode .page-title,
+body.dark-mode .metric-card h3,
+body.dark-mode .metric-value,
+body.dark-mode .table-header-title,
+body.dark-mode .data-table th,
+body.dark-mode .col-nombre,
+body.dark-mode .detail-info-list p {
+  color: #ffffff;
+}
+
+body.dark-mode .data-table th {
+  background-color: #2a2a2a;
+  border-bottom-color: #333333;
+}
+
+body.dark-mode .data-table td {
+  border-bottom-color: #2a2a2a;
+  color: #e2e8f0;
+}
+
+body.dark-mode .btn-white-box,
+body.dark-mode .config-btn {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
 }

@@ -6,13 +6,15 @@
   <title>MENTORIAS IAEV</title>
   <link rel="stylesheet" href="./css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- SweetAlert2 para modales estilizados -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="clean-replica">
 
   <div id="loginView" class="exact-replica-container">
     <div class="replica-card">
-      <h1 class="replica-title">Bienvenido a su Portal</h1>
+      <h1 class="replica-title" data-i18n="loginTitle">Bienvenido a su Portal</h1>
       
       <div class="replica-body">
         
@@ -22,16 +24,16 @@
 
         <form id="loginForm" class="replica-form">
           <div class="form-group replica-group">
-            <label for="username">Usuario (Correo electrónico)</label>
+            <label for="username" data-i18n="lblUsername">Usuario (Correo electrónico)</label>
             <input type="email" id="username" value="usuario@gmail.com" required placeholder="usuario@gmail.com">
           </div>
 
           <div class="form-group replica-group">
-            <label for="password">Contraseña</label>
+            <label for="password" data-i18n="lblPassword">Contraseña</label>
             <input type="password" id="password" value="12345678" required placeholder="••••••••">
           </div>
 
-          <button type="submit" class="btn-primary replica-btn-exact">Iniciar Sesión</button>
+          <button type="submit" class="btn-primary replica-btn-exact" data-i18n="btnLogin">Iniciar Sesión</button>
         </form>
 
       </div>
@@ -47,27 +49,27 @@
       
       <nav class="sidebar-menu">
         <button class="nav-btn active" data-target="panelControlView">
-          <img src="imagenes/panel-de-seguridad.png" alt="Panel" class="menu-icon"> Panel de control
+          <img src="imagenes/panel-de-seguridad.png" alt="Panel" class="menu-icon"> <span data-i18n="menuPanel">Panel de control</span>
         </button>
         <button class="nav-btn" data-target="estudiantesView">
-          <img src="imagenes/estudiantes.png" alt="Estudiantes" class="menu-icon"> Estudiantes
+          <img src="imagenes/estudiante.png" alt="Estudiantes" class="menu-icon"> <span data-i18n="menuStudents">Estudiantes</span>
         </button>
         <button class="nav-btn" data-target="sesionesView">
-          <img src="imagenes/calendario.png" alt="Sesiones" class="menu-icon"> Sesiones
+          <img src="imagenes/calendario.png" alt="Sesiones" class="menu-icon"> <span data-i18n="menuSessions">Sesiones</span>
         </button>
         <button class="nav-btn" data-target="riesgoView">
-          <img src="imagenes/riesgo.png" alt="Riesgo" class="menu-icon"> Riesgo académico
+          <img src="imagenes/riesgo.png" alt="Riesgo" class="menu-icon"> <span data-i18n="menuRisk">Riesgo académico</span>
         </button>
         <button class="nav-btn" data-target="cargarDatosView">
-          <img src="imagenes/carga-de-archivos.png" alt="Cargar datos" class="menu-icon"> Cargar datos
+          <img src="imagenes/carga-de-archivos.png" alt="Cargar datos" class="menu-icon"> <span data-i18n="menuLoadData">Cargar datos</span>
         </button>
         <button class="nav-btn" data-target="configuracionView">
-          <img src="imagenes/configuracion.png" alt="Configuración" class="menu-icon"> Configuración
+          <img src="imagenes/configuracion.png" alt="Configuración" class="menu-icon"> <span data-i18n="menuConfig">Configuración</span>
         </button>
       </nav>
 
       <div class="sidebar-footer">
-        <a href="#" class="terms-link">Términos y condiciones</a>
+        <a href="#" class="terms-link" data-i18n="termsAndConditions">Términos y condiciones</a>
       </div>
     </aside>
 
@@ -76,14 +78,14 @@
       <header class="top-navbar">
         <div class="search-bar-container">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="globalSearchInput" placeholder="Buscar estudiante por nombre o matrícula...">
+          <input type="text" id="globalSearchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar estudiante por nombre o matrícula...">
         </div>
 
         <div class="user-profile-widget" id="userProfileBtn">
           <div class="avatar-circle">OL</div>
           <div class="user-info">
             <span class="user-name">Olga Luevano</span>
-            <span class="user-role">Coordinadora</span>
+            <span class="user-role" data-i18n="userRole">Coordinadora</span>
           </div>
         </div>
       </header>
@@ -91,11 +93,11 @@
       <section class="content-area">
 
         <div id="panelControlView" class="view-section">
-          <h1 class="page-title">Métricas rápidas</h1>
+          <h1 class="page-title" data-i18n="titleQuickMetrics">Métricas rápidas</h1>
           
           <div class="metrics-grid">
             <div class="metric-card">
-              <h3>Total de mentorías activas</h3>
+              <h3 data-i18n="metricActiveMentorships">Total de mentorías activas</h3>
               <div class="metric-value">
                 <span id="metricTotalMentorias">342</span>
                 <span class="badge badge-success">+5%</span>
@@ -103,142 +105,148 @@
             </div>
 
             <div class="metric-card">
-              <h3>Estudiantes en riesgo</h3>
+              <h3 data-i18n="metricRiskStudents">Estudiantes en riesgo</h3>
               <div class="metric-value" id="metricEstudiantesRiesgo">18</div>
               <div class="metric-subtext">
-                <span id="metricMedioCount">12</span> Medio, <span id="metricCriticoCount" class="text-danger">6</span> Crítico
+                <span id="metricMedioCount">12</span> <span data-i18n="riskMedium">Medio</span>, <span id="metricCriticoCount" class="text-danger">6</span> <span data-i18n="riskCritical">Crítico</span>
               </div>
             </div>
 
             <div class="metric-card">
-              <h3>Próximas sesiones</h3>
+              <h3 data-i18n="metricUpcomingSessions">Próximas sesiones</h3>
               <div class="metric-value" id="metricProximasSesiones">24</div>
-              <div class="metric-subtext">esta semana</div>
+              <div class="metric-subtext" data-i18n="metricThisWeek">esta semana</div>
             </div>
           </div>
 
           <div class="table-container shadow-card">
-            <h2>Estado de Riesgo Académico de Estudiantes</h2>
+            <h2 data-i18n="titleAcademicRiskStatus">Estado de Riesgo Académico de Estudiantes</h2>
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Estado</th>
-                  <th>Nombre del Estudiante</th>
-                  <th>Matrícula</th>
-                  <th>Nivel de Riesgo</th>
-                  <th>Mentor</th>
-                  <th>Acciones</th>
+                  <th data-i18n="thStatus">Estado</th>
+                  <th data-i18n="thStudentName">Nombre del Estudiante</th>
+                  <th data-i18n="thId">Matrícula</th>
+                  <th data-i18n="thRiskLevel">Nivel de Riesgo</th>
+                  <th data-i18n="thMentor">Mentor</th>
+                  <th data-i18n="thActions">Acciones</th>
                 </tr>
               </thead>
               <tbody id="tablePanelBody">
-                </tbody>
+              </tbody>
             </table>
           </div>
         </div>
 
         <div id="estudiantesView" class="view-section hidden">
           <div class="table-container shadow-card">
-            <h2>Estatus de los Estudiantes</h2>
+            <h2 data-i18n="titleStudentStatus">Estatus de los Estudiantes</h2>
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Estado</th>
-                  <th>Nombre del Estudiante</th>
-                  <th>Matrícula</th>
-                  <th>Nivel de Riesgo</th>
-                  <th>Mentor</th>
-                  <th>Acciones</th>
+                  <th data-i18n="thStatus">Estado</th>
+                  <th data-i18n="thStudentName">Nombre del Estudiante</th>
+                  <th data-i18n="thId">Matrícula</th>
+                  <th data-i18n="thRiskLevel">Nivel de Riesgo</th>
+                  <th data-i18n="thMentor">Mentor</th>
+                  <th data-i18n="thActions">Acciones</th>
                 </tr>
               </thead>
               <tbody id="tableEstudiantesBody">
-                </tbody>
+              </tbody>
             </table>
           </div>
         </div>
 
         <div id="sesionesView" class="view-section hidden">
-          <h1 class="page-title">Calendario de Sesiones</h1>
+          <h1 class="page-title" data-i18n="titleSessionsCalendar">Calendario de Sesiones</h1>
           <div class="calendar-card shadow-card">
             <div class="calendar-controls">
-              <button class="btn-dark" id="btnPrevMonth">&lt; Anterior</button>
+              <button class="btn-dark" id="btnPrevMonth" data-i18n="btnPrev">&lt; Anterior</button>
               <div class="calendar-selects">
                 <select id="selectMonth">
-                  <option value="0">Enero</option>
-                  <option value="1">Febrero</option>
-                  <option value="2">Marzo</option>
-                  <option value="3">Abril</option>
-                  <option value="4">Mayo</option>
-                  <option value="5">Junio</option>
-                  <option value="6" selected>Julio</option>
-                  <option value="7">Agosto</option>
-                  <option value="8">Septiembre</option>
-                  <option value="9">Octubre</option>
-                  <option value="10">Noviembre</option>
-                  <option value="11">Diciembre</option>
+                  <option value="0" data-i18n="mJan">Enero</option>
+                  <option value="1" data-i18n="mFeb">Febrero</option>
+                  <option value="2" data-i18n="mMar">Marzo</option>
+                  <option value="3" data-i18n="mApr">Abril</option>
+                  <option value="4" data-i18n="mMay">Mayo</option>
+                  <option value="5" data-i18n="mJun">Junio</option>
+                  <option value="6" selected data-i18n="mJul">Julio</option>
+                  <option value="7" data-i18n="mAug">Agosto</option>
+                  <option value="8" data-i18n="mSep">Septiembre</option>
+                  <option value="9" data-i18n="mOct">Octubre</option>
+                  <option value="10" data-i18n="mNov">Noviembre</option>
+                  <option value="11" data-i18n="mDec">Diciembre</option>
                 </select>
                 <input type="number" id="inputYear" value="2026" min="1900" max="2100">
               </div>
-              <button class="btn-dark" id="btnNextMonth">Siguiente &gt;</button>
+              <button class="btn-dark" id="btnNextMonth" data-i18n="btnNext">Siguiente &gt;</button>
             </div>
 
             <div class="calendar-grid-header">
-              <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+              <div data-i18n="daySun">Dom</div><div data-i18n="dayMon">Lun</div><div data-i18n="dayTue">Mar</div><div data-i18n="dayWed">Mié</div><div data-i18n="dayThu">Jue</div><div data-i18n="dayFri">Vie</div><div data-i18n="daySat">Sáb</div>
             </div>
             <div class="calendar-grid-days" id="calendarGrid">
-              </div>
+            </div>
           </div>
         </div>
 
         <div id="riesgoView" class="view-section hidden">
           <div class="table-container shadow-card">
-            <h2>Alumnos Que Están En Riesgo Académico</h2>
+            <h2 data-i18n="titleRiskStudentsList">Alumnos Que Están En Riesgo Académico</h2>
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Estado</th>
-                  <th>Nombre del Estudiante</th>
-                  <th>Matrícula</th>
-                  <th>Nivel de Riesgo</th>
-                  <th>Mentor</th>
-                  <th>Acciones</th>
+                  <th data-i18n="thStatus">Estado</th>
+                  <th data-i18n="thStudentName">Nombre del Estudiante</th>
+                  <th data-i18n="thId">Matrícula</th>
+                  <th data-i18n="thRiskLevel">Nivel de Riesgo</th>
+                  <th data-i18n="thMentor">Mentor</th>
+                  <th data-i18n="thActions">Acciones</th>
                 </tr>
               </thead>
               <tbody id="tableRiesgoBody">
-                </tbody>
+              </tbody>
             </table>
           </div>
         </div>
 
         <div id="cargarDatosView" class="view-section hidden">
-          <h1 class="page-title text-center">Importación y Exportación de Datos</h1>
+          <h1 class="page-title text-center" data-i18n="titleDataImportExport">Importación y Exportación de Datos</h1>
           
           <div class="dropzone-card" id="dropzone">
             <i class="fa-solid fa-arrow-up dropzone-icon"></i>
-            <h3>Arrastrar y soltar archivo aquí</h3>
-            <p>o haz clic para seleccionar archivo (Excel)</p>
+            <h3 data-i18n="dropzoneTitle">Arrastrar y soltar archivo aquí</h3>
+            <p data-i18n="dropzoneSubtitle">o haz clic para seleccionar archivo (Excel)</p>
             <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" hidden>
           </div>
 
           <div class="data-actions-row">
             <div class="action-box">
-              <h4>Archivos Seleccionados</h4>
-              <p id="selectedFileName"><i class="fa-regular fa-file"></i> Aún no hay archivos seleccionados</p>
-              <button class="btn-dark" id="btnProcessFile">Subir</button>
+              <h4 data-i18n="titleSelectedFiles">Archivos Seleccionados</h4>
+              <p id="selectedFileName"><i class="fa-regular fa-file"></i> <span data-i18n="noFilesSelected">Aún no hay archivos seleccionados</span></p>
+              <button class="btn-dark" id="btnProcessFile" data-i18n="btnUpload">Subir</button>
             </div>
             <div class="action-box">
-              <h4>Descargar de listado de estudiantes (Excel)</h4>
-              <button class="btn-dark" id="btnExportFile">Exportar</button>
+              <h4 data-i18n="titleDownloadList">Descargar de listado de estudiantes (Excel)</h4>
+              <button class="btn-dark" id="btnExportFile" data-i18n="btnExport">Exportar</button>
             </div>
           </div>
         </div>
 
         <div id="configuracionView" class="view-section hidden">
-          <h1 class="page-title text-center">Panel de Configuración</h1>
+          <h1 class="page-title text-center" data-i18n="titleConfigPanel">Panel de Configuración</h1>
           <div class="config-card">
             <div class="config-options">
-              <button class="btn-white-box"><i class="fa-solid fa-lock"></i> Cambiar contraseñas</button>
-              <button class="btn-white-box"><i class="fa-solid fa-language"></i> Idiomas</button>
-              <button class="btn-white-box"><i class="fa-solid fa-circle-half-stroke"></i> Temas</button>
+              <button id="btn-change-password" class="btn-white-box">
+                <i class="fa-solid fa-lock"></i> <span data-i18n="btnPassword">Cambiar contraseñas</span>
+              </button>
+              <button id="btn-change-language" class="btn-white-box">
+                <i class="fa-solid fa-language"></i> <span id="lang-text" data-i18n="btnLanguage">Idiomas</span>
+              </button>
+              <button id="btn-change-theme" class="btn-white-box">
+                <i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="btnTheme">Temas</span>
+              </button>
             </div>
           </div>
         </div>
@@ -253,15 +261,15 @@
 
         <div id="detalleEstudianteView" class="view-section hidden">
           <div class="student-detail-card">
-            <button class="btn-back" id="btnBackToStudents"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+            <button class="btn-back" id="btnBackToStudents"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="btnBack">Volver</span></button>
             <div class="detail-avatar">
               <i class="fa-solid fa-user-large"></i>
             </div>
             <div class="detail-info-list">
-              <p><strong>Nombre del Alumno:</strong> <span id="detailNombre">----------</span></p>
-              <p><strong>Estatus:</strong> <span id="detailEstatus">----------</span></p>
-              <p><strong>Carrera:</strong> <span id="detailCarrera">----------</span></p>
-              <p><strong>Grado y sección:</strong> <span id="detailGrado">----------</span></p>
+              <p><strong data-i18n="lblStudentNameDetail">Nombre del Alumno:</strong> <span id="detailNombre">----------</span></p>
+              <p><strong data-i18n="lblStatusDetail">Estatus:</strong> <span id="detailEstatus">----------</span></p>
+              <p><strong data-i18n="lblCareerDetail">Carrera:</strong> <span id="detailCarrera">----------</span></p>
+              <p><strong data-i18n="lblGradeDetail">Grado y sección:</strong> <span id="detailGrado">----------</span></p>
             </div>
           </div>
         </div>
@@ -271,5 +279,6 @@
   </div>
 
   <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/config.js"></script>
 </body>
 </html>
