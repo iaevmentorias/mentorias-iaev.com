@@ -1,5 +1,5 @@
 // =========================================================================
-// MENTORÍAS IAEV - APP.JS (LOGIN ESTRICTO MANUAL - SIN AUTO-LOGIN)
+// MENTORÍAS IAEV - APP.JS (LECTURA DE ENTREVISTAS AL CALENDARIO)
 // =========================================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
@@ -13,10 +13,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
 import { 
   getFirestore, 
-  collection, 
   doc, 
-  setDoc, 
-  getDocs 
+  setDoc 
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -34,17 +32,33 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const MENTORA_DEFAULT = "Olga Luévano";
+
 const state = {
   currentUser: null,
   selectedFile: null,
   students: [], 
   calendar: {
-    year: 2026,
-    month: 6,
-    sessions: {
-      "2026-07-15": ["Sesión: Luis Rodríguez - Tutoría"]
-    }
+    year: new Date().getFullYear(),
+    month: new Date().getMonth(),
+    sessions: {} // Formato: { "YYYY-MM-DD": ["1ra Entrevista: [Matrícula] Nombre - 14:50"] }
   }
+};
+
+// Diccionario para mapear texto de meses a números (01 - 12)
+const MAPA_MESES = {
+  'ene': '01', 'jan': '01', 'enero': '01',
+  'feb': '02', 'febrero': '02',
+  'mar': '03', 'marzo': '03',
+  'abr': '04', 'apr': '04', 'abril': '04',
+  'may': '05', 'mayo': '05',
+  'jun': '06', 'junio': '06',
+  'jul': '07', 'julio': '07',
+  'ago': '08', 'aug': '08', 'agosto': '08',
+  'sep': '09', 'sept': '09', 'septiembre': '09',
+  'oct': '10', 'octubre': '10',
+  'nov': '11', 'noviembre': '11',
+  'dic': '12', 'dec': '12', 'diciembre': '12'
 };
 
 // =========================================================================
@@ -54,16 +68,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const appContainer = document.getElementById('appContainer');
   const loginView = document.getElementById('loginView');
 
-  // Asegurar que la pantalla de inicio sea SIEMPRE el Login
   if (appContainer) appContainer.classList.add('hidden');
   if (loginView) loginView.classList.remove('hidden');
 
-  // Matar cualquier sesión antigua que haya quedado en la caché del navegador
   try {
     await signOut(auth);
   } catch (error) {}
 
-  // Limpiar campos de texto al cargar
   const emailInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
   if (emailInput) emailInput.value = '';
@@ -96,13 +107,8 @@ function initLogin() {
       }
 
       try {
-        // Obligar a Firebase a NO guardar la sesión si se recarga la página
         await setPersistence(auth, inMemoryPersistence);
-        
-        // Iniciar sesión
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        
-        // Cargar la interfaz manualmente solo si la contraseña fue correcta
         mostrarDashboard(userCredential.user);
 
       } catch (error) {
@@ -113,7 +119,6 @@ function initLogin() {
   }
 }
 
-// Función exclusiva para construir la UI una vez que el login es exitoso
 function mostrarDashboard(user) {
   const loginView = document.getElementById('loginView');
   const appContainer = document.getElementById('appContainer');
@@ -151,8 +156,8 @@ function mostrarDashboard(user) {
   const profileAvatarLarge = document.querySelector('.profile-avatar-large');
   if (profileAvatarLarge) profileAvatarLarge.textContent = iniciales;
 
-  // Iniciar dashboard completamente vacío de datos hasta importar Excel
   state.students = []; 
+  state.calendar.sessions = {};
   updateAllViews();
 }
 
@@ -176,7 +181,8 @@ function getAuthErrorMessage(code) {
 window.logoutUser = () => {
   signOut(auth).then(() => {
     state.currentUser = null;
-    state.students = []; // Limpiamos los datos al salir
+    state.students = [];
+    state.calendar.sessions = {};
     
     document.getElementById('appContainer')?.classList.add('hidden');
     document.getElementById('loginView')?.classList.remove('hidden');
@@ -234,7 +240,7 @@ function initNavigation() {
 }
 
 // =========================================================================
-// 3. LECTURA INTELIGENTE DE EXCEL
+// 3. LECTURA INTELIGENTE DE EXCEL Y EXTRACCIÓN DE ENTREVISTAS AL CALENDARIO
 // =========================================================================
 function initExcelHandling() {
   const dropzone = document.getElementById('dropzone');
@@ -289,15 +295,16 @@ function processExcelFile(file) {
       }
 
       let estudiantesValidos = [];
+      state.calendar.sessions = {}; // Reiniciar sesiones registradas
 
       const PALABRAS_PROHIBIDAS = [
         'FORMATO', 'SEGUIMIENTO', 'USO MULTIPLE', 'INFORME', 'CUATRIMESTRAL',
         'ENTREVISTA', 'CALIFICACIONES', 'MATRICULA', 'MATRÍCULA', 'NOMBRE',
         'ESTUDIANTE', 'ALUMNO', 'CARRERA', 'INSTITUTO', 'UNIVERSIDAD',
-        'TECNOLOGICO', 'TECNOLÓGICO', 'REPORTE', 'LISTA', 'TUTOR', 'MENTOR',
-        'PERIODO', 'PERÍODO', 'GRUPO', 'GRADO', 'OBSERVACIONES', 'FECHA',
-        'FIRMA', 'NUMERO', 'NÚMERO', 'NUM', 'NÚM', 'NO.', 'DIRECCION',
-        'COORDINACION', 'EVALUACION', 'CUATRIMESTRE'
+        'TECNOLOGICO', 'TECNOLÓGICO', 'REPORTE', 'LISTA', 'MENTOR', 'MENTORES',
+        'TUTOR', 'TUTORES', 'PERIODO', 'PERÍODO', 'GRUPO', 'GRADO', 'OBSERVACIONES', 
+        'FECHA', 'FIRMA', 'NUMERO', 'NÚMERO', 'NUM', 'NÚM', 'NO.', 'DIRECCION',
+        'COORDINACION', 'EVALUACION', 'CUATRIMESTRE', 'ACUERDOS', 'COMPROMISOS', 'SITUACION'
       ];
 
       rows.forEach((row) => {
@@ -308,29 +315,29 @@ function processExcelFile(file) {
         let matriculaEncontrada = "";
         let nombreEncontrado = "";
 
+        // Detectar Matrícula (4 a 12 dígitos)
         for (let cellVal of cleanCells) {
           if (!cellVal) continue;
           let upper = cellVal.toUpperCase();
           if (PALABRAS_PROHIBIDAS.some(word => upper.includes(word))) continue;
 
           let numOnly = cellVal.replace(/[\s-]/g, '');
-          if (/^\d{5,12}$/.test(numOnly)) {
+          if (/^\d{4,12}$/.test(numOnly)) {
             matriculaEncontrada = numOnly;
             break;
           }
         }
 
+        // Detectar Nombre del Estudiante
         if (matriculaEncontrada) {
           for (let cellVal of cleanCells) {
-            if (!cellVal || cellVal === matriculaEncontrada) continue;
+            if (!cellVal || cellVal.replace(/[\s-]/g, '') === matriculaEncontrada) continue;
             let upper = cellVal.toUpperCase();
             if (PALABRAS_PROHIBIDAS.some(word => upper.includes(word))) continue;
 
-            if (/[A-ZÁÉÍÓÚÑ]{3,}/i.test(cellVal) && !/^\d+$/.test(cellVal)) {
-              if (cellVal.length >= 4) {
-                nombreEncontrado = cellVal;
-                break;
-              }
+            if (/^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]{3,}$/.test(cellVal) && !/^\d+$/.test(cellVal)) {
+              nombreEncontrado = cellVal.trim();
+              break;
             }
           }
         }
@@ -350,16 +357,19 @@ function processExcelFile(file) {
             nombre: nombreEncontrado,
             matricula: matriculaEncontrada,
             riesgo: nivelRiesgo,
-            mentor: "Carlos López",
+            mentor: MENTORA_DEFAULT,
             carrera: "Desarrollo de Software Multiplataforma",
             grado: "Cuatrimestre Actual",
             estado: "Activo"
           });
+
+          // Extraer fechas de entrevistas escaneando patrones de la fila
+          extraerEntrevistasDeFila(cleanCells, matriculaEncontrada, nombreEncontrado);
         }
       });
 
       if (estudiantesValidos.length === 0) {
-        alert("No se pudieron detectar registros de estudiantes en el Excel.");
+        alert("No se pudieron detectar registros válidos en el archivo Excel.");
         return;
       }
 
@@ -367,6 +377,7 @@ function processExcelFile(file) {
       estudiantesValidos.forEach(est => mapUnicos.set(est.matricula, est));
       state.students = Array.from(mapUnicos.values());
 
+      // Sincronizar en Firestore
       try {
         for (let est of state.students) {
           await setDoc(doc(db, "estudiantes", est.matricula), {
@@ -381,19 +392,57 @@ function processExcelFile(file) {
           });
         }
       } catch (fbError) {
-        console.error("Error al guardar en Firestore:", fbError);
+        console.error("Error guardando en Firestore:", fbError);
       }
 
       updateAllViews();
-      alert(`¡Éxito! Se importaron ${state.students.length} estudiantes correctamente.`);
+      
+      let totalEntrevistas = 0;
+      Object.values(state.calendar.sessions).forEach(arr => totalEntrevistas += arr.length);
+      
+      alert(`¡Éxito! Se importaron ${state.students.length} estudiantes y ${totalEntrevistas} entrevistas agendadas al calendario.`);
 
     } catch (error) {
       console.error("Error al procesar Excel:", error);
-      alert("Error al leer el archivo Excel.");
+      alert("Ocurrió un error al leer el archivo Excel.");
     }
   };
 
   reader.readAsArrayBuffer(file);
+}
+
+// Escanea la fila buscando secuencias de [Mes, Día, Hora] para armar la sesión del calendario
+function extraerEntrevistasDeFila(cells, matricula, nombre) {
+  let anioActual = state.calendar.year || new Date().getFullYear();
+
+  for (let i = 0; i < cells.length - 1; i++) {
+    let mesStr = cells[i].toLowerCase().trim();
+    let numMes = MAPA_MESES[mesStr];
+
+    if (numMes) {
+      let diaStr = cells[i + 1] ? cells[i + 1].trim() : "";
+      let horaStr = cells[i + 2] ? cells[i + 2].trim() : "";
+
+      // Validar si el día es un número entero entre 1 y 31
+      let diaNum = parseInt(diaStr, 10);
+      if (!isNaN(diaNum) && diaNum >= 1 && diaNum <= 31) {
+        let diaPadded = String(diaNum).padStart(2, '0');
+        let dateKey = `${anioActual}-${numMes}-${diaPadded}`;
+
+        if (!state.calendar.sessions[dateKey]) {
+          state.calendar.sessions[dateKey] = [];
+        }
+
+        let horaTexto = (horaStr && horaStr.includes(':')) ? ` - ${horaStr} hrs` : '';
+        let textoEntrevista = `Entrevista: [${matricula}] ${nombre}${horaTexto}`;
+
+        // Evitar duplicados exactos
+        if (!state.calendar.sessions[dateKey].includes(textoEntrevista)) {
+          state.calendar.sessions[dateKey].push(textoEntrevista);
+        }
+      }
+    }
+  }
 }
 
 function exportToExcel() {
@@ -426,6 +475,7 @@ function updateAllViews() {
   renderPanelTable();
   renderEstudiantesTable();
   renderRiesgoTable();
+  renderCalendarGrid();
 }
 
 function calculateMetrics() {
@@ -543,7 +593,8 @@ function initSearch() {
 
     const filtered = state.students.filter(s => 
       s.nombre.toLowerCase().includes(term) || 
-      s.matricula.toLowerCase().includes(term)
+      s.matricula.toLowerCase().includes(term) ||
+      s.mentor.toLowerCase().includes(term)
     );
 
     const renderFiltered = (tbodyId) => {
@@ -647,7 +698,7 @@ function renderCalendarGrid() {
 
     cell.innerHTML = `
       <div class="day-number">${day}</div>
-      <div class="day-sessions-badge">${daySessions.length > 0 ? `📌 ${daySessions.length} sesión(es)` : ''}</div>
+      <div class="day-sessions-badge">${daySessions.length > 0 ? `📌 ${daySessions.length} entrevista(s)` : ''}</div>
     `;
 
     cell.addEventListener('click', () => {
@@ -660,12 +711,12 @@ function renderCalendarGrid() {
 
 function abrirVentanaEdicionCalendario(dateKey) {
   let sesionesDia = state.calendar.sessions[dateKey] || [];
-  let listaTexto = sesionesDia.length > 0 ? sesionesDia.join("\n• ") : "Ninguna";
+  let listaTexto = sesionesDia.length > 0 ? sesionesDia.join("\n• ") : "Sin entrevistas agendadas";
 
   let nuevaSesion = prompt(
     `📅 Fecha: ${dateKey}\n\n` +
-    `Recordatorios/Sesiones actuales:\n• ${listaTexto}\n\n` +
-    `Escribe un nuevo recordatorio para este día:`
+    `Entrevistas / Sesiones programadas:\n• ${listaTexto}\n\n` +
+    `Escribe un nuevo recordatorio o entrevista para este día:`
   );
 
   if (nuevaSesion && nuevaSesion.trim() !== "") {
@@ -675,6 +726,6 @@ function abrirVentanaEdicionCalendario(dateKey) {
     state.calendar.sessions[dateKey].push(nuevaSesion.trim());
     calculateMetrics();
     renderCalendarGrid();
-    alert("Recordatorio agregado correctamente.");
+    alert("Registro guardado en el calendario.");
   }
 }
