@@ -1,36 +1,275 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión - IAEV</title>
-    <link rel="stylesheet" href="css/estilo_base.css">
-    <link rel="stylesheet" href="css/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENTORIAS IAEV</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="login-body">
+<body class="clean-replica">
 
-    <div class="login-card">
-        <h2>Bienvenido a su Portal</h2>
-        <div class="login-content">
-            <div class="login-illustration">
-                <img src="imagenes/portal.png" alt="Ilustración IAEV">
-            </div>
-            
-            <form class="login-form" action="principal.html">
-                <div class="form-group">
-                    <label>Usuario (Correo electronico)</label>
-                    <input type="email" value="olgaluev1098@gmail.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" value="********" required>
-                </div>
-
-                <button type="submit" class="btn-yellow">Iniciar Sesión</button>
-            </form>
+  <div id="loginView" class="exact-replica-container">
+    <div class="replica-card">
+      <h1 class="replica-title">Bienvenido a su Portal</h1>
+      
+      <div class="replica-body">
+        
+        <div class="replica-assets-column">
+          <img src="imagenes/portal.png" alt="Portal IAEV" class="img-portal">
         </div>
-    </div>
 
+        <form id="loginForm" class="replica-form">
+          <div class="form-group replica-group">
+            <label for="username">Usuario (Correo electrónico)</label>
+            <input type="email" id="username" value="usuario@gmail.com" required placeholder="usuario@gmail.com">
+          </div>
+
+          <div class="form-group replica-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" value="12345678" required placeholder="••••••••">
+          </div>
+
+          <button type="submit" class="btn-primary replica-btn-exact">Iniciar Sesión</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="appContainer" class="app-container hidden">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="imagenes/IAEV.png" alt="IAEV Logo" class="sidebar-logo">
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="nav-btn active" data-target="panelControlView">
+          <img src="imagenes/panel-de-seguridad.png" alt="Panel" class="menu-icon"> Panel de control
+        </button>
+        <button class="nav-btn" data-target="estudiantesView">
+          <img src="imagenes/estudiantes.png" alt="Estudiantes" class="menu-icon"> Estudiantes
+        </button>
+        <button class="nav-btn" data-target="sesionesView">
+          <img src="imagenes/calendario.png" alt="Sesiones" class="menu-icon"> Sesiones
+        </button>
+        <button class="nav-btn" data-target="riesgoView">
+          <img src="imagenes/riesgo.png" alt="Riesgo" class="menu-icon"> Riesgo académico
+        </button>
+        <button class="nav-btn" data-target="cargarDatosView">
+          <img src="imagenes/carga-de-archivos.png" alt="Cargar datos" class="menu-icon"> Cargar datos
+        </button>
+        <button class="nav-btn" data-target="configuracionView">
+          <img src="imagenes/configuracion.png" alt="Configuración" class="menu-icon"> Configuración
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" class="terms-link">Términos y condiciones</a>
+      </div>
+    </aside>
+
+    <main class="main-wrapper">
+      
+      <header class="top-navbar">
+        <div class="search-bar-container">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="globalSearchInput" placeholder="Buscar estudiante por nombre o matrícula...">
+        </div>
+
+        <div class="user-profile-widget" id="userProfileBtn">
+          <div class="avatar-circle">OL</div>
+          <div class="user-info">
+            <span class="user-name">Olga Luevano</span>
+            <span class="user-role">Coordinadora</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="content-area">
+
+        <div id="panelControlView" class="view-section">
+          <h1 class="page-title">Métricas rápidas</h1>
+          
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <h3>Total de mentorías activas</h3>
+              <div class="metric-value">
+                <span id="metricTotalMentorias">342</span>
+                <span class="badge badge-success">+5%</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <h3>Estudiantes en riesgo</h3>
+              <div class="metric-value" id="metricEstudiantesRiesgo">18</div>
+              <div class="metric-subtext">
+                <span id="metricMedioCount">12</span> Medio, <span id="metricCriticoCount" class="text-danger">6</span> Crítico
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <h3>Próximas sesiones</h3>
+              <div class="metric-value" id="metricProximasSesiones">24</div>
+              <div class="metric-subtext">esta semana</div>
+            </div>
+          </div>
+
+          <div class="table-container shadow-card">
+            <h2>Estado de Riesgo Académico de Estudiantes</h2>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Estado</th>
+                  <th>Nombre del Estudiante</th>
+                  <th>Matrícula</th>
+                  <th>Nivel de Riesgo</th>
+                  <th>Mentor</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablePanelBody">
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="estudiantesView" class="view-section hidden">
+          <div class="table-container shadow-card">
+            <h2>Estatus de los Estudiantes</h2>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Estado</th>
+                  <th>Nombre del Estudiante</th>
+                  <th>Matrícula</th>
+                  <th>Nivel de Riesgo</th>
+                  <th>Mentor</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tableEstudiantesBody">
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="sesionesView" class="view-section hidden">
+          <h1 class="page-title">Calendario de Sesiones</h1>
+          <div class="calendar-card shadow-card">
+            <div class="calendar-controls">
+              <button class="btn-dark" id="btnPrevMonth">&lt; Anterior</button>
+              <div class="calendar-selects">
+                <select id="selectMonth">
+                  <option value="0">Enero</option>
+                  <option value="1">Febrero</option>
+                  <option value="2">Marzo</option>
+                  <option value="3">Abril</option>
+                  <option value="4">Mayo</option>
+                  <option value="5">Junio</option>
+                  <option value="6" selected>Julio</option>
+                  <option value="7">Agosto</option>
+                  <option value="8">Septiembre</option>
+                  <option value="9">Octubre</option>
+                  <option value="10">Noviembre</option>
+                  <option value="11">Diciembre</option>
+                </select>
+                <input type="number" id="inputYear" value="2026" min="1900" max="2100">
+              </div>
+              <button class="btn-dark" id="btnNextMonth">Siguiente &gt;</button>
+            </div>
+
+            <div class="calendar-grid-header">
+              <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+            </div>
+            <div class="calendar-grid-days" id="calendarGrid">
+              </div>
+          </div>
+        </div>
+
+        <div id="riesgoView" class="view-section hidden">
+          <div class="table-container shadow-card">
+            <h2>Alumnos Que Están En Riesgo Académico</h2>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Estado</th>
+                  <th>Nombre del Estudiante</th>
+                  <th>Matrícula</th>
+                  <th>Nivel de Riesgo</th>
+                  <th>Mentor</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tableRiesgoBody">
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="cargarDatosView" class="view-section hidden">
+          <h1 class="page-title text-center">Importación y Exportación de Datos</h1>
+          
+          <div class="dropzone-card" id="dropzone">
+            <i class="fa-solid fa-arrow-up dropzone-icon"></i>
+            <h3>Arrastrar y soltar archivo aquí</h3>
+            <p>o haz clic para seleccionar archivo (Excel)</p>
+            <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" hidden>
+          </div>
+
+          <div class="data-actions-row">
+            <div class="action-box">
+              <h4>Archivos Seleccionados</h4>
+              <p id="selectedFileName"><i class="fa-regular fa-file"></i> Aún no hay archivos seleccionados</p>
+              <button class="btn-dark" id="btnProcessFile">Subir</button>
+            </div>
+            <div class="action-box">
+              <h4>Descargar de listado de estudiantes (Excel)</h4>
+              <button class="btn-dark" id="btnExportFile">Exportar</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="configuracionView" class="view-section hidden">
+          <h1 class="page-title text-center">Panel de Configuración</h1>
+          <div class="config-card">
+            <div class="config-options">
+              <button class="btn-white-box"><i class="fa-solid fa-lock"></i> Cambiar contraseñas</button>
+              <button class="btn-white-box"><i class="fa-solid fa-language"></i> Idiomas</button>
+              <button class="btn-white-box"><i class="fa-solid fa-circle-half-stroke"></i> Temas</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="perfilView" class="view-section hidden">
+          <div class="profile-card">
+            <div class="profile-avatar-large">OL</div>
+            <h1 class="profile-name">Olga Luevano</h1>
+            <p class="profile-email">Olgaluev1098@gmail.com</p>
+          </div>
+        </div>
+
+        <div id="detalleEstudianteView" class="view-section hidden">
+          <div class="student-detail-card">
+            <button class="btn-back" id="btnBackToStudents"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+            <div class="detail-avatar">
+              <i class="fa-solid fa-user-large"></i>
+            </div>
+            <div class="detail-info-list">
+              <p><strong>Nombre del Alumno:</strong> <span id="detailNombre">----------</span></p>
+              <p><strong>Estatus:</strong> <span id="detailEstatus">----------</span></p>
+              <p><strong>Carrera:</strong> <span id="detailCarrera">----------</span></p>
+              <p><strong>Grado y sección:</strong> <span id="detailGrado">----------</span></p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
