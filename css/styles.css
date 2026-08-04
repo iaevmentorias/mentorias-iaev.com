@@ -19,7 +19,7 @@
 /* =========================================================================
    PANTALLA DE LOGIN
    ========================================================================= */
-.exact-replica-container,
+.exact-replica-container,                       
 .login-container {
   display: flex;
   justify-content: center;
@@ -34,7 +34,7 @@
 .login-card {
   background-color: #ffffff;
   width: 100%;
-  max-width: 650px;
+  max-width: 650px;                                                                 
   padding: 40px 50px;
   border-radius: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -777,4 +777,169 @@ body.dark-mode .config-btn {
   background-color: #1e1e1e;
   color: #ffffff;
   border: 1px solid #333333;
+}
+
+/* =========================================================================
+   MODAL DE TÉRMINOS Y CONDICIONES 
+   ========================================================================== */
+.terms-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente para la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.terms-modal.hidden {
+  display: none !important;
+}
+
+.terms-modal-content {
+  background-color: var(--card-bg, #ffffff); /* Fondo totalmente sólido según el tema */
+  color: var(--text-color, #333333);
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
+.terms-text-content {
+  overflow-y: auto;
+  max-height: 50vh;
+  padding-right: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  background-color: var(--bg-color, #f8f9fa);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+
+
+
+
+/* =========================================================================
+   ESTILOS PARA LA VENTANA DE TÉRMINOS Y CONDICIONES EN TEMA OSCURO
+   ========================================================================== */
+
+/* Fondo oscuro translúcido detrás del modal de términos */
+body.dark-theme #termsModal,
+body.dark-theme .terms-modal {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* El cuadro/contenido de la ventana de términos (cambia a gris oscuro) */
+body.dark-theme #termsModal .terms-modal-content,
+body.dark-theme .terms-modal .terms-modal-content {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #3d3d3d !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Textos y títulos dentro del modal de términos en modo oscuro */
+body.dark-theme #termsModal .terms-modal-content h3,
+body.dark-theme #termsModal .terms-modal-content p,
+body.dark-theme #termsModal .terms-modal-content div,
+body.dark-theme .terms-modal .terms-text-content {
+  color: #cccccc !important;
+}
+
+/* EXCEPCIÓN: El botón de cerrar (o cualquier botón dentro de términos) 
+   mantiene su diseño original o el color que prefieras sin volverse amarillo */
+body.dark-theme #termsModal .close-terms-btn,
+body.dark-theme .terms-modal .close-terms-btn {
+  /* Aquí puedes dejar los estilos originales del botón o definir un color neutro */
+  background-color: #e0e0e0 !important; /* Color claro original o el que uses */
+  color: #333333 !important;
+  border: none !important;
+  font-weight: normal;
+}
+
+body.dark-theme #termsModal .close-terms-btn:hover,
+body.dark-theme .terms-modal .close-terms-btn:hover {
+  background-color: #cccccc !important;
+}
+
+
+
+
+
+
+
+
+/* =========================================================================
+   ESTILOS DE TEMA OSCURO PARA MODALES 
+   ========================================================================== */
+
+/* Fondo oscuro translúcido detrás de cualquier modal */
+body.dark-theme .terms-modal,
+body.dark-theme .modal,
+body.dark-theme #modalExitoImportacion {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* El cuadro de la ventana modal (color gris elegante) */
+body.dark-theme .terms-modal-content,
+body.dark-theme .modal-content,
+body.dark-theme #modalExitoImportacion > div {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #3d3d3d !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Textos, títulos y párrafos dentro de las modales en modo oscuro */
+body.dark-theme .terms-modal-content p,
+body.dark-theme .modal-content p,
+body.dark-theme .terms-modal-content h3,
+body.dark-theme .modal-content h3,
+body.dark-theme #modalExitoImportacion p,
+body.dark-theme #modalExitoImportacion h3 {
+  color: #f1f1f1 !important;
+}
+
+/* Botones principales dentro de las modales (Color Amarillo) */
+body.dark-theme .terms-modal-content .btn-primary,
+body.dark-theme .modal-content .btn-primary,
+body.dark-theme #modalExitoImportacion .btn-primary,
+body.dark-theme #btnCerrarModalExito {
+  background-color: #ffc107 !important;
+  color: #121212 !important;
+  font-weight: bold;
+  border: none !important;
+  transition: background-color 0.2s ease;
+}
+
+/* Efecto hover al pasar el cursor por el botón amarillo */
+body.dark-theme .terms-modal-content .btn-primary:hover,
+body.dark-theme .modal-content .btn-primary:hover,
+body.dark-theme #modalExitoImportacion .btn-primary:hover,
+body.dark-theme #btnCerrarModalExito:hover {
+  background-color: #e0a800 !important;
+}
+
+/* Botones secundarios o de cancelar (gris un poco más claro) */
+body.dark-theme .terms-modal-content .close-terms-btn,
+body.dark-theme .modal-content .btn-secondary {
+  background-color: #444444 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+body.dark-theme .terms-modal-content .close-terms-btn:hover,
+body.dark-theme .modal-content .btn-secondary:hover {
+  background-color: #555555 !important;
 }
