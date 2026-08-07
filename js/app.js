@@ -63,8 +63,51 @@ const MONTH_MAP = {
   'dic': '12', 'dec': '12', 'diciembre': '12', 'december': '12'
 };
 
+// =========================================================================
+// TRADUCCIONES Y DICCIONARIO
+// =========================================================================
 const translations = {
   es: {
+    // Top Cards (Dashboard)
+    totalActiveMentorships: "Total de mentorías activas",
+    studentsAtRisk: "Estudiantes en riesgo",
+    upcomingSessions: "Próximas sesiones",
+    mediumRisk: "Medio",
+    criticalRisk: "Crítico",
+    thisWeek: "esta semana",
+
+    // Tablas y encabezados
+    studentStatus: "Estatus de los Estudiantes",
+    statusHeader: "Estatus",
+    studentNameHeader: "Nombre del Estudiante",
+    idHeader: "ID",
+    riskLevelHeader: "Nivel de Riesgo",
+    mentorHeader: "Mentor",
+    actionsHeader: "Acciones",
+    noDataAvailable: "No hay datos de estudiantes disponibles. Cargue un archivo de Excel.",
+
+    // Riesgo académico
+    academicRiskTitle: "Alumnos Que Están En Riesgo Académico",
+    noAcademicRisk: "No hay estudiantes en riesgo académico.",
+
+    // Carga de datos
+    dataImportExport: "Importación y Exportación de Datos",
+    dragDropText: "Arrastrar y soltar archivo aquí",
+    clickSelectText: "o haz clic para seleccionar archivo (Excel)",
+    selectedFiles: "Archivos Seleccionados",
+    noFilesSelected: "Aún no hay archivos seleccionados",
+    uploadBtn: "Subir",
+    downloadStudentList: "Descargar de listado de estudiantes (Excel)",
+    exportBtn: "Exportar",
+
+    // Perfil del estudiante
+    backBtn: "← Volver",
+    studentNameLabel: "Nombre del Alumno:",
+    statusLabel: "Estatus:",
+    careerLabel: "Carrera:",
+    gradeSectionLabel: "Grado y sección:",
+
+    // Menu Sidebar & Roles
     menuPanel: "Panel",
     menuStudents: "Estudiantes",
     menuSessions: "Sesiones",
@@ -73,38 +116,54 @@ const translations = {
     menuConfig: "Configuración",
     termsAndConditions: "Términos y condiciones",
     userRole: "Coordinador",
+    logoutBtn: "Cerrar Sesión",
+    
+    // Encabezados & Placeholders de Búsqueda
     searchPlaceholder: "Buscar estudiante por nombre o matrícula...",
     titleQuickMetrics: "Métricas Rápidas",
     titleAcademicRiskStatus: "Estatus de los Estudiantes",
     titleSessionsCalendar: "Calendario de Sesiones",
     titleConfigPanel: "Panel de Configuración",
+    
+    // Vista Configuración
     btnPassword: "Cambiar contraseña",
     btnLanguage: "Idiomas",
     btnTheme: "Temas",
+
+    // Títulos de Secciones
     panelTitle: "Panel",
     studentsTitle: "Gestión de Estudiantes",
     sessionsTitle: "Calendario de Sesiones",
     riskTitle: "Alumnos Que Están En Riesgo Académico",
     loadDataTitle: "Importación y Exportación de Datos",
     configTitle: "Panel de Configuración",
+
+    // Métricas
     metricTotal: "Total de mentorías activas",
     metricRisk: "Estudiantes en riesgo",
     metricSessions: "Próximas sesiones",
     metricThisWeek: "esta semana",
     metricMediumLabel: "Medio",
     metricCriticalLabel: "Crítico",
+
+    // Tablas
     thStatus: "Status",
     thName: "Nombre del Estudiante",
     thId: "ID",
     thRisk: "Nivel de Riesgo",
     thMentor: "Mentor",
     thActions: "Acciones",
+    viewMore: "Ver más",
+
+    // Detalle del Estudiante
     detailTitle: "Detalles del Estudiante",
     detailBackBtn: "← Volver a Estudiantes",
     detailGeneralInfo: "Información General",
     detailCareerLabel: "Carrera:",
     detailTermLabel: "Cuatrimestre:",
     detailStatusLabel: "Estatus:",
+
+    // Carga e Importación de Archivos
     dropzoneText: "Arrastrar y soltar archivo aquí",
     dropzoneHint: "o haz clic para seleccionar archivo (Excel)",
     btnProcess: "Subir",
@@ -112,17 +171,67 @@ const translations = {
     selectedFileDefault: "Aún no hay archivos seleccionados",
     sectionFilesTitle: "Archivos Seleccionados",
     sectionExportTitle: "Descargar de listado de estudiantes (Excel)",
-    riskGood: "Bueno",
+
+    // Niveles de Riesgo y Mensajes
+    riskBueno: "Bueno",
     riskMedium: "Medio",
     riskCritical: "Crítico",
-    viewMore: "Ver más",
     noStudentsMsg: "No hay datos de estudiantes disponibles. Cargue un archivo de Excel.",
     noRiskMsg: "No hay estudiantes en riesgo académico.",
+
+    // Calendario y Controles
     prevBtn: "< Anterior",
     nextBtn: "Siguiente >",
-    monthsList: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    monthsList: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+
+    // Textos Estáticos Extra
+    loginTitle: "Iniciar Sesión",
+    loginEmailLabel: "Correo Electrónico:",
+    loginPassLabel: "Contraseña:",
+    loginBtn: "Ingresar"
   },
+
   en: {
+    // Top Cards (Dashboard)
+    totalActiveMentorships: "Total Active Mentorships",
+    studentsAtRisk: "Students at Risk",
+    upcomingSessions: "Upcoming Sessions",
+    mediumRisk: "Medium",
+    criticalRisk: "Critical",
+    thisWeek: "this week",
+
+    // Tables & Headers
+    studentStatus: "Student Status",
+    statusHeader: "Status",
+    studentNameHeader: "Student Name",
+    idHeader: "ID",
+    riskLevelHeader: "Risk Level",
+    mentorHeader: "Mentor",
+    actionsHeader: "Actions",
+    noDataAvailable: "No student data available. Please upload an Excel file.",
+
+    // Academic Risk
+    academicRiskTitle: "Students at Academic Risk",
+    noAcademicRisk: "There are no students at academic risk.",
+
+    // Upload Data
+    dataImportExport: "Data Import and Export",
+    dragDropText: "Drag and drop file here",
+    clickSelectText: "or click to select file (Excel)",
+    selectedFiles: "Selected Files",
+    noFilesSelected: "No files selected yet",
+    uploadBtn: "Upload",
+    downloadStudentList: "Download student list (Excel)",
+    exportBtn: "Export",
+
+    // Student Profile
+    backBtn: "← Back",
+    studentNameLabel: "Student Name:",
+    statusLabel: "Status:",
+    careerLabel: "Major:",
+    gradeSectionLabel: "Grade and section:",
+
+    // Menu Sidebar & Roles
     menuPanel: "Dashboard",
     menuStudents: "Students",
     menuSessions: "Sessions",
@@ -131,38 +240,54 @@ const translations = {
     menuConfig: "Settings",
     termsAndConditions: "Terms and conditions",
     userRole: "Coordinator",
+    logoutBtn: "Log Out",
+
+    // Encabezados & Placeholders de Búsqueda
     searchPlaceholder: "Search student by name or ID...",
     titleQuickMetrics: "Quick Metrics",
     titleAcademicRiskStatus: "Student Status",
     titleSessionsCalendar: "Sessions Calendar",
     titleConfigPanel: "Settings Panel",
+
+    // Vista Configuración
     btnPassword: "Change password",
     btnLanguage: "Languages",
     btnTheme: "Themes",
+
+    // Títulos de Secciones
     panelTitle: "Dashboard",
     studentsTitle: "Student Management",
     sessionsTitle: "Sessions Calendar",
     riskTitle: "Students At Academic Risk",
     loadDataTitle: "Data Import and Export",
     configTitle: "Settings Panel",
+
+    // Métricas
     metricTotal: "Total active mentorings",
     metricRisk: "Students at risk",
     metricSessions: "Upcoming sessions",
     metricThisWeek: "this week",
     metricMediumLabel: "Medium",
     metricCriticalLabel: "Critical",
+
+    // Tablas
     thStatus: "Status",
     thName: "Student Name",
     thId: "ID",
     thRisk: "Risk Level",
     thMentor: "Mentor",
     thActions: "Actions",
+    viewMore: "View more",
+
+    // Detalle del Estudiante
     detailTitle: "Student Details",
     detailBackBtn: "← Back to Students",
     detailGeneralInfo: "General Information",
     detailCareerLabel: "Career:",
     detailTermLabel: "Term:",
     detailStatusLabel: "Status:",
+
+    // Carga e Importación de Archivos
     dropzoneText: "Drag and drop file here",
     dropzoneHint: "or click to select file (Excel)",
     btnProcess: "Upload",
@@ -170,19 +295,28 @@ const translations = {
     selectedFileDefault: "No files selected yet",
     sectionFilesTitle: "Selected Files",
     sectionExportTitle: "Download student list (Excel)",
+
+    // Niveles de Riesgo y Mensajes
     riskGood: "Good",
     riskMedium: "Medium",
     riskCritical: "Critical",
-    viewMore: "View more",
     noStudentsMsg: "No student data available. Upload an Excel file.",
     noRiskMsg: "No students at academic risk.",
+
+    // Calendario y Controles
     prevBtn: "< Previous",
     nextBtn: "Next >",
-    monthsList: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    monthsList: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+
+    // Textos Estáticos Extra
+    loginTitle: "Sign In",
+    loginEmailLabel: "Email Address:",
+    loginPassLabel: "Password:",
+    loginBtn: "Login"
   }
 };
 
-let currentLang = localStorage.getItem("app_lang") || "en";
+let currentLang = localStorage.getItem("app_lang") || "es";
 
 document.addEventListener('DOMContentLoaded', async () => {
   const appContainer = document.getElementById('appContainer');
@@ -260,7 +394,7 @@ function showCenteredModal(title, message, callback = null) {
 }
 
 // =========================================================================
-// BUTTON CONFIGURATION AND PASSWORD CHANGE
+// CONFIGURACIÓN DE BOTONES Y CAMBIO DE CONTRASEÑA
 // =========================================================================
 function initConfigButtons() {
   const btnPassword = document.getElementById("btn-change-password");
@@ -432,86 +566,100 @@ function toggleLanguage() {
 }
 
 function applyLanguage(lang) {
+  const currentDict = translations[lang] || {};
+  const otherDict = translations[lang === 'es' ? 'en' : 'es'] || {};
+
+  const mapFromOther = {};
+  for (const key in otherDict) {
+    const valOther = otherDict[key];
+    const valCurrent = currentDict[key];
+    if (typeof valOther === 'string' && typeof valCurrent === 'string') {
+      mapFromOther[valOther.trim().toLowerCase()] = valCurrent;
+    }
+  }
+
+  function getTranslationForText(text) {
+    const clean = text.trim();
+    if (!clean) return null;
+    if (currentDict[clean]) return currentDict[clean];
+    const lower = clean.toLowerCase();
+    if (mapFromOther[lower]) return mapFromOther[lower];
+    return null;
+  }
+
+  // 1. Traducir elementos explícitos con atributos data-i18n
   document.querySelectorAll("[data-i18n]").forEach(element => {
     const key = element.getAttribute("data-i18n");
-    if (translations[lang] && translations[lang][key]) {
-      element.textContent = translations[lang][key];
+    if (currentDict[key]) {
+      element.textContent = currentDict[key];
     }
   });
 
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+  // 2. Traducir placeholders con atributo data-i18n-placeholder o por coincidencia
+  document.querySelectorAll("input, textarea").forEach(element => {
     const key = element.getAttribute("data-i18n-placeholder");
-    if (translations[lang] && translations[lang][key]) {
-      element.placeholder = translations[lang][key];
+    if (key && currentDict[key]) {
+      element.placeholder = currentDict[key];
+    } else if (element.placeholder) {
+      const translated = getTranslationForText(element.placeholder);
+      if (translated) element.placeholder = translated;
     }
   });
 
-  const dropzoneTextElem = document.querySelector('.dropzone-text');
-  if (dropzoneTextElem) {
-    dropzoneTextElem.textContent = translations[lang].dropzoneText;
+  // 3. Recorrido universal y profundo de nodos de texto para traducir todo lo estático en el DOM
+  function walkAndTranslate(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.nodeValue.trim();
+      if (text) {
+        const translated = getTranslationForText(text);
+        if (translated) {
+          node.nodeValue = node.nodeValue.replace(text, translated);
+        }
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const tagName = node.tagName.toLowerCase();
+      if (tagName !== 'script' && tagName !== 'style' && tagName !== 'input' && tagName !== 'textarea') {
+        for (let child of node.childNodes) {
+          walkAndTranslate(child);
+        }
+      }
+    }
   }
+
+  walkAndTranslate(document.body);
+
+  // 4. Zona de carga de archivos (Dropzone & Botones)
+  const dropzoneTextElem = document.querySelector('.dropzone-text');
+  if (dropzoneTextElem) dropzoneTextElem.textContent = currentDict.dropzoneText || dropzoneTextElem.textContent;
 
   const dropzoneHintElem = document.querySelector('.dropzone-hint');
-  if (dropzoneHintElem) {
-    dropzoneHintElem.textContent = translations[lang].dropzoneHint;
-  }
+  if (dropzoneHintElem) dropzoneHintElem.textContent = currentDict.dropzoneHint || dropzoneHintElem.textContent;
 
   const btnProcessFile = document.getElementById('btnProcessFile');
-  if (btnProcessFile) {
-    btnProcessFile.textContent = translations[lang].btnProcess;
-  }
+  if (btnProcessFile) btnProcessFile.textContent = currentDict.btnProcess || btnProcessFile.textContent;
 
   const btnExportFile = document.getElementById('btnExportFile');
-  if (btnExportFile) {
-    btnExportFile.textContent = translations[lang].btnExport;
-  }
+  if (btnExportFile) btnExportFile.textContent = currentDict.btnExport || btnExportFile.textContent;
 
   const selectedFileName = document.getElementById('selectedFileName');
   if (selectedFileName && (!state.selectedFile)) {
-    selectedFileName.innerHTML = `<i class="fa-regular fa-file"></i> ${translations[lang].selectedFileDefault}`;
+    selectedFileName.innerHTML = `<i class="fa-regular fa-file"></i> ${currentDict.selectedFileDefault}`;
   }
 
-  // Update table headers dynamically for thorough translation
-  const thNameElem = document.getElementById('thNameText');
-  if (thNameElem) thNameElem.textContent = translations[lang].thName;
+  // Encabezados de Tablas Globales
+  document.querySelectorAll('.th-name, #thNameText').forEach(el => el.textContent = currentDict.thName || el.textContent);
+  document.querySelectorAll('.th-id, #thIdText').forEach(el => el.textContent = currentDict.thId || el.textContent);
+  document.querySelectorAll('.th-risk, #thRiskText').forEach(el => el.textContent = currentDict.thRisk || el.textContent);
+  document.querySelectorAll('.th-mentor, #thMentorText').forEach(el => el.textContent = currentDict.thMentor || el.textContent);
+  document.querySelectorAll('.th-actions, #thActionsText').forEach(el => el.textContent = currentDict.thActions || el.textContent);
+  document.querySelectorAll('.th-status, #thStatusText').forEach(el => el.textContent = currentDict.thStatus || el.textContent);
 
-  const thIdElem = document.getElementById('thIdText');
-  if (thIdElem) thIdElem.textContent = translations[lang].thId;
-
-  const thRiskElem = document.getElementById('thRiskText');
-  if (thRiskElem) thRiskElem.textContent = translations[lang].thRisk;
-
-  const thMentorElem = document.getElementById('thMentorText');
-  if (thMentorElem) thMentorElem.textContent = translations[lang].thMentor;
-
-  const thActionsElem = document.getElementById('thActionsText');
-  if (thActionsElem) thActionsElem.textContent = translations[lang].thActions;
-
-  // Also query elements inside tables if IDs are generic
-  document.querySelectorAll('.th-name').forEach(el => el.textContent = translations[lang].thName);
-  document.querySelectorAll('.th-id').forEach(el => el.textContent = translations[lang].thId);
-  document.querySelectorAll('.th-risk').forEach(el => el.textContent = translations[lang].thRisk);
-  document.querySelectorAll('.th-mentor').forEach(el => el.textContent = translations[lang].thMentor);
-  document.querySelectorAll('.th-actions').forEach(el => el.textContent = translations[lang].thActions);
-
-  // Update static layout titles directly for comprehensive coverage
-  const mappingTitles = {
-    'titleQuickMetrics': translations[lang].titleQuickMetrics,
-    'titleAcademicRiskStatus': translations[lang].titleAcademicRiskStatus,
-    'titleSessionsCalendar': translations[lang].titleSessionsCalendar,
-    'titleConfigPanel': translations[lang].titleConfigPanel
-  };
-
-  for (const [key, val] of Object.entries(mappingTitles)) {
-    document.querySelectorAll(`[data-i18n="${key}"]`).forEach(el => el.textContent = val);
-  }
-
-  // Sync calendar month select elements text/options
+  // Selector de Meses y Navegación del Calendario
   const selectMonth = document.getElementById('selectMonth');
-  if (selectMonth) {
+  if (selectMonth && currentDict.monthsList) {
     const currentSelectedVal = selectMonth.value;
     selectMonth.innerHTML = '';
-    translations[lang].monthsList.forEach((mName, idx) => {
+    currentDict.monthsList.forEach((mName, idx) => {
       const opt = document.createElement('option');
       opt.value = idx;
       opt.textContent = mName;
@@ -521,10 +669,10 @@ function applyLanguage(lang) {
   }
 
   const btnPrevMonth = document.getElementById('btnPrevMonth');
-  if (btnPrevMonth) btnPrevMonth.textContent = translations[lang].prevBtn;
+  if (btnPrevMonth) btnPrevMonth.textContent = currentDict.prevBtn || btnPrevMonth.textContent;
 
   const btnNextMonth = document.getElementById('btnNextMonth');
-  if (btnNextMonth) btnNextMonth.textContent = translations[lang].nextBtn;
+  if (btnNextMonth) btnNextMonth.textContent = currentDict.nextBtn || btnNextMonth.textContent;
 }
 
 function initLogin() {
@@ -589,6 +737,10 @@ function showDashboard(user) {
 
   state.students = []; 
   state.calendar.sessions = {};
+  
+  // Asegura que mantenga el idioma seleccionado al entrar al panel
+  applyLanguage(currentLang);
+  
   updateAllViews();
 }
 
@@ -916,6 +1068,7 @@ function updateAllViews() {
   renderEstudiantesTable();
   renderRiesgoTable();
   renderCalendarGrid();
+  applyLanguage(currentLang);
 }
 
 function calculateMetrics() {
@@ -936,7 +1089,6 @@ function calculateMetrics() {
   const elemCritical = document.getElementById('metricCriticoCount');
   if (elemCritical) elemCritical.textContent = criticalCount;
 
-  // Update dynamic metric sublabels translation text
   const metricMediumLabelElem = document.getElementById('metricMediumLabel');
   if (metricMediumLabelElem) metricMediumLabelElem.textContent = translations[currentLang].metricMediumLabel;
 
@@ -1223,28 +1375,26 @@ function openCalendarDayModal(dateKey, sessions) {
         <input type="text" id="nuevoRecordatorioInput" placeholder="${placeholderText}" style="width: 100%; padding: 9px; background: ${inputBg}; color: ${textColor}; border: 1px solid ${inputBorder}; border-radius: 6px; font-size: 12px; margin-bottom: 8px;">
         <button id="addReminderBtn" style="width: 100%; padding: 9px; background: #22c55e; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px;">${addBtnText}</button>
       </div>
-      <button id="closeCalendarModalBtn" style="padding: 8px 20px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">${closeBtnText}</button>
+      <button id="closeModalBtn" style="padding: 9px 20px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">${closeBtnText}</button>
     </div>
   `;
 
   document.body.appendChild(modalOverlay);
 
   document.getElementById('addReminderBtn').addEventListener('click', () => {
-    const input = document.getElementById('nuevoRecordatorioInput');
-    const val = input.value.trim();
-    if (val) {
-      if (!state.calendar.sessions[dateKey]) {
-        state.calendar.sessions[dateKey] = [];
-      }
-      state.calendar.sessions[dateKey].push(val);
-      modalOverlay.remove();
-      renderCalendarGrid();
-      calculateMetrics();
-      showCenteredModal(currentLang === 'es' ? 'Éxito' : 'Success', currentLang === 'es' ? 'Recordatorio agregado exitosamente.' : 'Reminder added successfully.');
+    const inputVal = document.getElementById('nuevoRecordatorioInput').value.trim();
+    if (!inputVal) return;
+
+    if (!state.calendar.sessions[dateKey]) {
+      state.calendar.sessions[dateKey] = [];
     }
+    state.calendar.sessions[dateKey].push(inputVal);
+    modalOverlay.remove();
+    updateAllViews();
+    openCalendarDayModal(dateKey, state.calendar.sessions[dateKey]);
   });
 
-  document.getElementById('closeCalendarModalBtn').addEventListener('click', () => {
+  document.getElementById('closeModalBtn').addEventListener('click', () => {
     modalOverlay.remove();
   });
 
@@ -1253,126 +1403,40 @@ function openCalendarDayModal(dateKey, sessions) {
   });
 }
 
-window.editReminder = (dateKey, index) => {
-  const currentVal = state.calendar.sessions[dateKey][index];
-  const promptText = currentLang === 'es' ? 'Editar recordatorio o sesión:' : 'Edit reminder or session:';
-  const newVal = prompt(promptText, currentVal);
-  if (newVal !== null && newVal.trim() !== "") {
-    state.calendar.sessions[dateKey][index] = newVal.trim();
-    document.getElementById('calendarDayModal')?.remove();
-    renderCalendarGrid();
-    calculateMetrics();
-    showCenteredModal(currentLang === 'es' ? 'Éxito' : 'Success', currentLang === 'es' ? 'Recordatorio actualizado.' : 'Reminder updated.');
-  }
-};
-
 window.deleteReminder = (dateKey, index) => {
-  const confirmText = currentLang === 'es' ? '¿Está seguro de que desea eliminar este recordatorio?' : 'Are you sure you want to delete this reminder?';
-  if (confirm(confirmText)) {
+  if (state.calendar.sessions[dateKey]) {
     state.calendar.sessions[dateKey].splice(index, 1);
     if (state.calendar.sessions[dateKey].length === 0) {
       delete state.calendar.sessions[dateKey];
     }
     document.getElementById('calendarDayModal')?.remove();
-    renderCalendarGrid();
-    calculateMetrics();
-    showCenteredModal(currentLang === 'es' ? 'Éxito' : 'Success', currentLang === 'es' ? 'Recordatorio eliminado.' : 'Reminder deleted.');
+    updateAllViews();
+    openCalendarDayModal(dateKey, state.calendar.sessions[dateKey] || []);
   }
 };
 
-// =========================================================================
-// TERMS AND CONDITIONS WINDOW (WITH DARK MODE SUPPORT)
-// =========================================================================
-const termsContentTextEs = `TÉRMINOS Y CONDICIONES DE MENTORÍAS IAEV\n
-Bienvenido al sistema de GESTIÓN DE MENTORÍAS IAEV de la Universidad Politécnica de Gómez Palacio (UPGOP). Al acceder y utilizar este sitio web, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones[cite: 2].\n\n
-1. Definiciones: Plataforma, Usuario, Mentor, Tutorado, Administrador[cite: 2].\n
-2. Purpose: Facilitar la programación, administración, seguimiento y comunicación[cite: 2].\n
-3. Registro de Usuario: Se requiere crear una cuenta con información verídica[cite: 2].\n
-4. Uso Permitido: Responsable y en cumplimiento con la legislación aplicable[cite: 2].\n
-5. Mentorías: Contacto y gestión, sin garantizar resultados específicos[cite: 2].\n
-6. Programación y Cancelaciones: Aviso previo mínimo de 24 horas[cite: 2].\n
-7. Propiedad Intelectual: Contenido protegido por las leyes aplicables[cite: 2].\n
-8. Protección de Datos Personales: Tratados de acuerdo con la normativa[cite: 2].\n
-9. Limitación de Responsabilidad: Exento por decisiones o interrupciones técnicas[cite: 2].\n
-10. Modificaciones: Sujeto a actualizaciones en el sitio web[cite: 2].`;
+window.editReminder = (dateKey, index) => {
+  const currentVal = state.calendar.sessions[dateKey][index];
+  const promptText = currentLang === 'es' ? 'Editar sesión o recordatorio:' : 'Edit session or reminder:';
+  const newVal = prompt(promptText, currentVal);
 
-const termsContentTextEn = `IAEV MENTORSHIPS TERMS AND CONDITIONS\n
-Welcome to GESTION DE MENTORIAS IAEV of the Universidad Politécnica de Gómez Palacio (UPGOP). By accessing and using this website, you agree to comply with and be bound by the following terms and conditions[cite: 2].\n\n
-1. Definitions: Platform, User, Mentor, Mentee, Administrator[cite: 2].\n
-2. Purpose: To facilitate scheduling, administration, tracking, and communication[cite: 2].\n
-3. User Registration: Creating an account with truthful information is required[cite: 2].\n
-4. Permitted Use: Responsible and in compliance with applicable legislation[cite: 2].\n
-5. Mentorships: Contact and management, without guaranteeing specific results[cite: 2].\n
-6. Scheduling and Cancellations: Minimum 24 hours advance notice[cite: 2].\n
-7. Intellectual Property: Content protected by applicable laws[cite: 2].\n
-8. Personal Data Protection: Treated in accordance with regulations[cite: 2].\n
-9. Limitation of Liability: Exempt for decisions or technical interruptions[cite: 2].\n
-10. Modifications: Subject to updates on the website[cite: 2].`;
+  if (newVal !== null && newVal.trim() !== '') {
+    state.calendar.sessions[dateKey][index] = newVal.trim();
+    document.getElementById('calendarDayModal')?.remove();
+    updateAllViews();
+    openCalendarDayModal(dateKey, state.calendar.sessions[dateKey]);
+  }
+};
 
 function initTermsModal() {
-  const termsTriggers = document.querySelectorAll('[data-i18n="termsAndConditions"], #btnTerms, .btn-terms');
-  
-  let modal = document.getElementById('termsModal');
-  if (!modal) {
-    const isDark = document.body.classList.contains("dark-mode");
-    const bgCard = isDark ? "#1f2937" : "#ffffff";
-    const textColor = isDark ? "#f3f4f6" : "#333333";
-
-    const termsText = currentLang === 'es' ? termsContentTextEs : termsContentTextEn;
-    const modalTitle = currentLang === 'es' ? "Términos y Condiciones - IAEV" : "Terms and Conditions - IAEV";
-    const closeText = currentLang === 'es' ? "Cerrar" : "Close";
-
-    const modalHTML = `
-      <div id="termsModal" class="terms-modal hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 9999;">
-        <div id="termsModalContent" style="background: ${bgCard}; color: ${textColor}; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid ${isDark ? '#374151' : 'transparent'};">
-          <h3 style="margin-top: 0; color: #eab308;">${modalTitle}</h3>
-          <div id="termsTextDiv" style="font-size: 13px; line-height: 1.6; white-space: pre-line; margin: 15px 0;">${termsText}</div>
-          <button class="close-terms-btn" style="padding: 8px 20px; background: #eab308; color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">${closeText}</button>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    modal = document.getElementById('termsModal');
-  }
-
-  const closeBtn = modal.querySelector('.close-terms-btn');
-
-  termsTriggers.forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isDarkNow = document.body.classList.contains("dark-mode");
-      const contentDiv = document.getElementById('termsModalContent');
-      const textDiv = document.getElementById('termsTextDiv');
-      
-      if (contentDiv) {
-        contentDiv.style.background = isDarkNow ? "#1f2937" : "#ffffff";
-        contentDiv.style.color = isDarkNow ? "#f3f4f6" : "#333333";
-        contentDiv.style.border = isDarkNow ? "1px solid #374151" : "none";
-      }
-
-      if (textDiv) {
-        textDiv.textContent = currentLang === 'es' ? termsContentTextEs : termsContentTextEn;
-      }
-
-      modal.style.display = 'flex';
-      modal.classList.add('flex');
-      modal.classList.remove('hidden');
-    });
-  });
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
+  const btnTerms = document.querySelector('.btn-terms');
+  if (btnTerms) {
+    btnTerms.addEventListener('click', () => {
+      const title = currentLang === 'es' ? 'Términos y Condiciones' : 'Terms and Conditions';
+      const msg = currentLang === 'es' 
+        ? 'Sistema de Gestión de Mentorías IAEV.\n\nEste sistema está diseñado para el seguimiento académico y de mentorías de la institución. Todos los datos cargados son de carácter confidencial.'
+        : 'IAEV Mentorship Management System.\n\nThis system is designed for institutional academic and mentorship tracking. All uploaded data is confidential.';
+      showCenteredModal(title, msg);
     });
   }
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
-    }
-  });
 }
